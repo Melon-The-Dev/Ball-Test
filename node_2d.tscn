@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://4pqund3nukl7"]
+
+[ext_resource type="Script" uid="uid://dwl3koja4hqs5" path="res://node_2d.gd" id="1_wtcfe"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wtcfe"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_0e48y"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_epypp"]
+font_size = 12
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_wtcfe")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="speedup" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="balls" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="score" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Score"
+label_settings = SubResource("LabelSettings_wtcfe")
+
+[node name="gover" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/gover"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/gover/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/gover/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Game Over"
+label_settings = SubResource("LabelSettings_0e48y")
+
+[node name="Label2" type="Label" parent="CanvasLayer/gover/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Press anywhere to play again"
+label_settings = SubResource("LabelSettings_epypp")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="speedup" to="." method="_on_speedup_timeout"]
